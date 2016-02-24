@@ -58,4 +58,5 @@
 ;;*****************************************************
 
 (defn vconcat [v1 v2]
-  (vec (concat v1 v2)))
+  (let [diff (clojure.set/intersection (set v1) (set v2))]
+    (vec (if (empty? diff) (concat (or v1 []) v2) diff))))
